@@ -1,6 +1,7 @@
 .idea
 
 # Yarn Zero Install
+node_modules
 .yarn/*
 !.yarn/cache
 !.yarn/patches
