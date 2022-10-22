@@ -6,6 +6,13 @@
     "services/**/*"
   ],
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.26.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
   }
 }
