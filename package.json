@@ -1,0 +1,11 @@
+{
+  "name": "form-builder",
+  "packageManager": "yarn@3.2.4",
+  "workspaces": [
+    "packages/**/*",
+    "services/**/*"
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
+}
