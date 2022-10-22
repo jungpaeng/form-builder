@@ -3,7 +3,7 @@ module.exports = {
   ignorePatterns: ['!**/*'],
   overrides: [
     {
-      files: ["'*.ts', '*.tsx', '*.js', '*.jsx'"],
+      files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
       plugins: ['react', 'react-hooks'],
       rules: {
         // react-hooks
