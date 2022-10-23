@@ -2751,6 +2751,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/renderer-storybook/",\
           "packageDependencies": [\
             ["@form-builder/renderer-storybook", "workspace:packages/renderer-storybook"],\
+            ["@form-builder/renderer", "workspace:packages/renderer"],\
             ["@ladle/react", "virtual:cc3848410571e20b4515160cf85b347ed23be98fc861314276aa86988f9f9ada816464c01a64f3f4228395c73c7ebdfd6a06edf5c36538f2c3aa6ece3b50a203#npm:2.4.5"],\
             ["@types/react", "npm:18.0.21"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:5.40.1"],\

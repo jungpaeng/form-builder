@@ -1457,6 +1457,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@form-builder/renderer-storybook@workspace:packages/renderer-storybook"
   dependencies:
+    "@form-builder/renderer": "workspace:^"
     "@ladle/react": ^2.4.5
     "@types/react": ^18.0.21
     "@typescript-eslint/eslint-plugin": ^5.40.1
@@ -1470,7 +1471,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@form-builder/renderer@workspace:packages/renderer":
+"@form-builder/renderer@workspace:^, @form-builder/renderer@workspace:packages/renderer":
   version: 0.0.0-use.local
   resolution: "@form-builder/renderer@workspace:packages/renderer"
   dependencies:
