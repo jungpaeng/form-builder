@@ -5,6 +5,9 @@
     "packages/**/*",
     "services/**/*"
   ],
+  "scripts": {
+    "new-package": "hygen packages new"
+  },
   "devDependencies": {
     "@nrwl/nx-cloud": "latest",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
@@ -13,6 +16,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "hygen": "^6.2.11",
     "nx": "14.8.6",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"
