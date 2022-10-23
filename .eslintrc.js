@@ -4,6 +4,7 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
+      parser: '@typescript-eslint/parser',
       env: { es6: true, node: true, browser: true },
       plugins: ['import', 'unused-imports', 'prettier'],
       rules: {
@@ -41,7 +42,6 @@ module.exports = {
     },
     {
       files: ['*.ts', '*.tsx'],
-      parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module',
