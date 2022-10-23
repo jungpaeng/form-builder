@@ -1,3 +1,7 @@
+---
+to: packages/<%= name %>/tsconfig.lib.json
+---
+
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
