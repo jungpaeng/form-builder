@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EffectManager } from './effects';
 import { FormBuilderRendererPlugin, PluginContext } from './plugins';
-import { FormRenderer } from './render/components';
+import { FormRender, FormRenderProps } from './render/components';
 import { defineWidget } from './render/utils';
 
 export type BeforeRenderAction = (args: {
@@ -32,10 +32,10 @@ export function renderer(options: FormBuilderRendererOptions) {
     .forEach((item) => item?.({ actions: { defineWidget } }));
 
   return {
-    Renderer() {
+    Renderer(formRenderProps: FormRenderProps) {
       return (
         <PluginContext.Provider value={plugins}>
-          <FormRenderer />
+          <FormRender {...formRenderProps} />
           <EffectManager />
         </PluginContext.Provider>
       );
