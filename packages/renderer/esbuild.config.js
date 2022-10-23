@@ -8,10 +8,11 @@ const external = Object.keys({
   ...pkg.peerDependencies,
 });
 
-const base = ({ entryPoints = ['./src/index.ts'], outdir = 'dist' }) => ({
+const base = ({ entryPoints = ['src/index.ts'], outdir = 'dist' }) => ({
   entryPoints,
   outdir,
   external,
+  bundle: true,
   target: 'es2015',
   watch,
   minify: !watch,
