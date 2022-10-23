@@ -29,9 +29,7 @@ export function renderer(options: FormBuilderRendererOptions) {
       if (Array.isArray(curr)) return [...prev, ...curr];
       return [...prev, curr];
     }, [])
-    .forEach((item) => {
-      item?.({ actions: { defineWidget } });
-    });
+    .forEach((item) => item?.({ actions: { defineWidget } }));
 
   return {
     Renderer() {
