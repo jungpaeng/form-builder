@@ -1,22 +1,17 @@
 const { build } = require('esbuild');
-
-const pkg = require('./package.json');
+const { nodeExternalsPlugin } = require('esbuild-node-externals');
 
 const watch = process.argv.includes('--watch');
-const external = Object.keys({
-  ...pkg.dependencies,
-  ...pkg.peerDependencies,
-});
 
 const base = ({ entryPoints = ['src/index.ts'], outdir = 'dist' }) => ({
   entryPoints,
   outdir,
-  external,
   bundle: true,
   target: 'es2015',
   watch,
   minify: !watch,
   sourcemap: !watch,
+  plugins: [nodeExternalsPlugin()],
 });
 
 Promise.all([
