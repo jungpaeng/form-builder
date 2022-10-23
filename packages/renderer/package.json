@@ -1,5 +1,24 @@
 {
   "name": "@form-builder/renderer",
+  "version": "0.0.0",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "concurrently \"yarn:build:*\"",
+    "build:bundle:dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "build:bundle:js": "node ./esbuild.config.js"
+  },
   "devDependencies": {
     "@types/react": "^18.0.21",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
