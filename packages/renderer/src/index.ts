@@ -1,3 +1,1 @@
-export function renderer() {
-  return 'renderer 2';
-}
+export * from './renderer';
