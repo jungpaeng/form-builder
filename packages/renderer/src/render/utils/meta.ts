@@ -1,11 +1,14 @@
 import { getWidget, WidgetKey, widgetMap } from './widget';
 
-export type MetaProps = MetaData | FieldData[];
 export type MetaData = {
   /**
    * @description Form에 대한 필드를 정의하는 부분
    */
   fields: FieldData[];
+  /**
+   * @description 전체 폼에 viewMode를 적용시킵니다.
+   */
+  viewMode?: boolean;
 };
 export type FieldData = {
   /**
@@ -22,11 +25,13 @@ export type FieldData = {
    * @description 뷰 모드일 때 보여지는 위젯
    */
   viewWidget?: WidgetKey;
+  /**
+   * @description 해당 필드에 viewMode를 적용시킵니다.
+   */
+  viewMode?: boolean;
 };
 
-export function normalizeMetaWidget(meta: MetaProps) {
-  const fields = Array.isArray(meta) ? meta : meta.fields;
-
+export function normalizeMetaWidget({ fields }: MetaData) {
   const normalizeFields: FieldData[] = fields.map((field) => {
     const widget = getWidget(field.widget!);
     const viewWidget = getWidget(field.viewWidget!);
@@ -47,8 +52,5 @@ export function normalizeMetaWidget(meta: MetaProps) {
     return { ...field, widget, viewWidget };
   });
 
-  if (Array.isArray(meta)) return { fields: normalizeFields };
-  if (!meta.fields) return { fields: normalizeFields };
-
-  return { ...meta, fields: normalizeFields };
+  return { fields: normalizeFields };
 }
