@@ -28,12 +28,15 @@ export function normalizeMetaWidget(meta: MetaProps) {
   const fields = Array.isArray(meta) ? meta : meta.fields;
 
   const normalizeFields: FieldData[] = fields.map((field) => {
-    const widget = getWidget(field.widget);
-    const viewWidget = getWidget(field.viewWidget);
+    const widget = getWidget(field.widget!);
+    const viewWidget = getWidget(field.viewWidget!);
 
-    const item = Object.values(widgetMap).find((item) => [widget, viewWidget].includes(item.widget));
-    if (item?.metaConvertor) {
-      const newField = item.metaConvertor(field);
+    const currentItemKey = Object.keys(widgetMap).find((item) => {
+      return item === field.widget;
+    });
+
+    if (currentItemKey && widgetMap[currentItemKey]?.metaConvertor) {
+      const newField = widgetMap[currentItemKey].metaConvertor!(field);
 
       if (!newField) {
         throw new Error(`metaConvertor of ${field.widget} must return a value`);

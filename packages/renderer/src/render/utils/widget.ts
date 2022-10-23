@@ -1,11 +1,11 @@
 import { FieldData } from './meta';
 
-export type WidgetKey = React.ReactNode | string;
+export type WidgetKey = React.ElementType | string;
 type Widget = {
   /**
    * @description
    */
-  widget: React.ReactNode;
+  widget: React.ElementType;
   /**
    * @description field의 widget 또는 viewWidget을 변환하는 함수입니다.
    */
