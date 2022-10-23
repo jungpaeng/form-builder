@@ -1447,6 +1447,7 @@ __metadata:
   dependencies:
     "@types/react": ^18.0.21
     "@typescript-eslint/eslint-plugin": ^5.40.1
+    dts-bundle-generator: ^7.0.0
     esbuild: ^0.15.12
     eslint-plugin-import: ^2.26.0
     eslint-plugin-prettier: ^4.2.1
@@ -2848,6 +2849,18 @@ __metadata:
   version: 10.0.0
   resolution: "dotenv@npm:10.0.0"
   checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
+  languageName: node
+  linkType: hard
+
+"dts-bundle-generator@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "dts-bundle-generator@npm:7.0.0"
+  dependencies:
+    typescript: ">=4.5.2"
+    yargs: ^17.6.0
+  bin:
+    dts-bundle-generator: dist/bin/dts-bundle-generator.js
+  checksum: e48a70ae66be43a796a116e84e7e18c743c6efbe18d7111420956597b07a7aa33107c55fdeb4d52f3f7d36a6e0b853140b46d9d7f0af77254ed067e32f81a947
   languageName: node
   linkType: hard
 
@@ -6414,7 +6427,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.4":
+"typescript@npm:>=4.5.2, typescript@npm:^4.8.4":
   version: 4.8.4
   resolution: "typescript@npm:4.8.4"
   bin:
@@ -6424,7 +6437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@>=4.5.2#~builtin<compat/typescript>, typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
   resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=701156"
   bin:
@@ -6747,7 +6760,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.4.0":
+"yargs@npm:^17.4.0, yargs@npm:^17.6.0":
   version: 17.6.0
   resolution: "yargs@npm:17.6.0"
   dependencies:
