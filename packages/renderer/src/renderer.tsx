@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { EffectManager } from './effects';
 import { FormBuilderRendererPlugin, PluginContext } from './plugins/PluginContext';
 
 export type FormBuilderRendererOptions = {
@@ -19,6 +20,7 @@ export function renderer(options: FormBuilderRendererOptions) {
       return (
         <PluginContext.Provider value={plugins}>
           <p>Renderer Component</p>
+          <EffectManager />
         </PluginContext.Provider>
       );
     },
