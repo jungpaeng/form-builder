@@ -2506,6 +2506,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@form-builder/renderer", "workspace:packages/renderer"],\
             ["@types/react", "npm:18.0.21"],\
             ["@typescript-eslint/eslint-plugin", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:5.40.1"],\
+            ["esbuild", "npm:0.15.12"],\
             ["eslint-plugin-import", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.26.0"],\
             ["eslint-plugin-prettier", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:4.2.1"],\
             ["eslint-plugin-react", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:7.31.10"],\

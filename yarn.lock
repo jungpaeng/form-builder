@@ -1447,6 +1447,7 @@ __metadata:
   dependencies:
     "@types/react": ^18.0.21
     "@typescript-eslint/eslint-plugin": ^5.40.1
+    esbuild: ^0.15.12
     eslint-plugin-import: ^2.26.0
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react: ^7.31.10
@@ -3132,7 +3133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.15.9":
+"esbuild@npm:^0.15.12, esbuild@npm:^0.15.9":
   version: 0.15.12
   resolution: "esbuild@npm:0.15.12"
   dependencies:
