@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { defineWidget } from '../../render/utils';
+
 export type FormBuilderRendererPlugin = () => {
   /**
    * @description 플러그인이 React Tree로 흡수될 때 부여되는 고유한 키
@@ -8,7 +10,7 @@ export type FormBuilderRendererPlugin = () => {
   /**
    * @description Renderer 컴포넌트가 처음 호출될 때 실행됩니다.
    */
-  onInit?: () => void;
+  onInit?: (args: { actions: { defineWidget: typeof defineWidget } }) => void;
 };
 
 type PluginContextValue = Array<ReturnType<FormBuilderRendererPlugin>>;

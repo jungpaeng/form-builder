@@ -10,18 +10,16 @@ const { Renderer } = renderer({
   plugins: [
     () => {
       return {
-        key: 'plugin-1',
-        onInit() {
-          console.log('plugin-1 onInit');
+        key: 'basic element',
+        onInit({ actions: { defineWidget } }) {
+          defineWidget('div', { widget: <div /> });
+          defineWidget('span', { widget: <span /> });
+          defineWidget('input', { widget: <input /> });
         },
       };
     },
   ],
 });
 
-export const Story = () => (
-  <div>
-    <Renderer />
-  </div>
-);
+export const Story = () => <Renderer />;
 Story.storyName = 'Test';
