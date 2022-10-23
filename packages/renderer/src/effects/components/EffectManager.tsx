@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { usePluginContext } from '../../plugins';
-import { defineWidget } from '../../render/utils';
 
 export function EffectManager() {
   const plugins = usePluginContext();
@@ -9,7 +8,7 @@ export function EffectManager() {
   React.useEffect(() => {
     function onInit() {
       plugins.forEach((plugin) => {
-        plugin.onInit?.({ actions: { defineWidget } });
+        plugin.onInit?.();
       });
     }
 

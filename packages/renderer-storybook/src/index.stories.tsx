@@ -7,15 +7,18 @@ export default {
 };
 
 const { Renderer } = renderer({
+  beforeRender: [
+    ({ actions: { defineWidget } }) => {
+      defineWidget('div', { widget: <div /> });
+      defineWidget('span', { widget: <span /> });
+      defineWidget('input', { widget: <input /> });
+    },
+  ],
   plugins: [
     () => {
       return {
         key: 'basic element',
-        onInit({ actions: { defineWidget } }) {
-          defineWidget('div', { widget: <div /> });
-          defineWidget('span', { widget: <span /> });
-          defineWidget('input', { widget: <input /> });
-        },
+        onInit() {},
       };
     },
   ],
