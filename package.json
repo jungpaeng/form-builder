@@ -6,7 +6,7 @@
     "services/**/*"
   ],
   "scripts": {
-    "new-package": "hygen packages new"
+    "new-package": "hygen packages new && yarn"
   },
   "devDependencies": {
     "@nrwl/nx-cloud": "latest",

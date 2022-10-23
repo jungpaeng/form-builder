@@ -1,5 +1,7 @@
 .idea
 
+dist
+
 # Yarn Zero Install
 node_modules
 .yarn/*
