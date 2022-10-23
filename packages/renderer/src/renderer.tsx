@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EffectManager } from './effects';
 import { FormBuilderRendererPlugin, PluginContext } from './plugins';
-import { FormRenderer } from './render/components';
+import { FormRender } from './render/components';
 import { defineWidget } from './render/utils';
 
 export type BeforeRenderAction = (args: {
@@ -35,7 +35,7 @@ export function renderer(options: FormBuilderRendererOptions) {
     Renderer() {
       return (
         <PluginContext.Provider value={plugins}>
-          <FormRenderer />
+          <FormRender />
           <EffectManager />
         </PluginContext.Provider>
       );

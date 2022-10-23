@@ -1,5 +1,5 @@
 import React from 'react';
 
-export function FormRenderer() {
+export function FormRender() {
   return <p>Form Renderer</p>;
 }
