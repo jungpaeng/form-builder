@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePluginContext } from '../../plugins/PluginContext';
+import { usePluginContext } from '../../plugins';
 
 export function EffectManager() {
   const plugins = usePluginContext();

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { EffectManager } from './effects';
-import { FormBuilderRendererPlugin, PluginContext } from './plugins/PluginContext';
+import { FormBuilderRendererPlugin, PluginContext } from './plugins';
 
 export type FormBuilderRendererOptions = {
   plugins?: Array<FormBuilderRendererPlugin | FormBuilderRendererPlugin[]>;
