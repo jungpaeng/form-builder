@@ -29,6 +29,7 @@ to: packages/<%= name %>/package.json
     "concurrently": "^7.5.0",
     "dts-bundle-generator": "^7.0.0",
     "esbuild": "^0.15.12",
+    "esbuild-node-externals": "^1.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unused-imports": "^2.0.0"

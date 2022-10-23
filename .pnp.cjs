@@ -2734,6 +2734,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["concurrently", "npm:7.5.0"],\
             ["dts-bundle-generator", "npm:7.0.0"],\
             ["esbuild", "npm:0.15.12"],\
+            ["esbuild-node-externals", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:1.5.0"],\
             ["eslint-plugin-import", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.26.0"],\
             ["eslint-plugin-prettier", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:4.2.1"],\
             ["eslint-plugin-react", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:7.31.10"],\
@@ -2741,7 +2742,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-unused-imports", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.0.0"],\
             ["jest", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:29.2.1"],\
             ["react", "npm:18.2.0"],\
-            ["ts-jest", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:29.0.3"]\
+            ["ts-jest", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:29.0.3"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -5819,6 +5821,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/esbuild-netbsd-64-npm-0.15.12-de1349abcc/node_modules/esbuild-netbsd-64/",\
           "packageDependencies": [\
             ["esbuild-netbsd-64", "npm:0.15.12"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["esbuild-node-externals", [\
+        ["npm:1.5.0", {\
+          "packageLocation": "./.yarn/cache/esbuild-node-externals-npm-1.5.0-54572c4907-8a96cedc35.zip/node_modules/esbuild-node-externals/",\
+          "packageDependencies": [\
+            ["esbuild-node-externals", "npm:1.5.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:1.5.0", {\
+          "packageLocation": "./.yarn/__virtual__/esbuild-node-externals-virtual-6372252d9e/0/cache/esbuild-node-externals-npm-1.5.0-54572c4907-8a96cedc35.zip/node_modules/esbuild-node-externals/",\
+          "packageDependencies": [\
+            ["esbuild-node-externals", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:1.5.0"],\
+            ["@types/esbuild", null],\
+            ["esbuild", "npm:0.15.12"],\
+            ["find-up", "npm:5.0.0"],\
+            ["tslib", "npm:2.3.1"]\
+          ],\
+          "packagePeers": [\
+            "@types/esbuild",\
+            "esbuild"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10935,6 +10961,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tslib-npm-1.14.1-102499115e-dbe628ef87.zip/node_modules/tslib/",\
           "packageDependencies": [\
             ["tslib", "npm:1.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.3.1", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.3.1-0e21e18015-de17a98d46.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.3.1"]\
           ],\
           "linkType": "HARD"\
         }],\

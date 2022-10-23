@@ -6,11 +6,23 @@ export default {
   meta: { key: 'value' },
 };
 
-const { Renderer } = renderer();
+const { Renderer } = renderer({
+  beforeRender: [
+    ({ actions: { defineWidget } }) => {
+      defineWidget('div', { widget: <div /> });
+      defineWidget('span', { widget: <span /> });
+      defineWidget('input', { widget: <input /> });
+    },
+  ],
+  plugins: [
+    () => {
+      return {
+        key: 'basic element',
+        onInit() {},
+      };
+    },
+  ],
+});
 
-export const Story = () => (
-  <div>
-    <Renderer />
-  </div>
-);
+export const Story = () => <Renderer />;
 Story.storyName = 'Test';
