@@ -9,20 +9,21 @@ export default {
 const { Renderer } = renderer({
   beforeRender: [
     ({ actions: { defineWidget } }) => {
-      defineWidget('div', { widget: <div /> });
-      defineWidget('span', { widget: <span /> });
-      defineWidget('input', { widget: <input /> });
-    },
-  ],
-  plugins: [
-    () => {
-      return {
-        key: 'basic element',
-        onInit() {},
-      };
+      defineWidget('div', { widget: 'div' });
+      defineWidget('span', { widget: 'span' });
+      defineWidget('input', { widget: 'input' });
     },
   ],
 });
 
-export const Story = () => <Renderer />;
+export const Story = () => (
+  <Renderer
+    meta={{
+      fields: [
+        { key: 'fields-1', widget: 'div' },
+        { key: 'fields-2', widget: 'span' },
+      ],
+    }}
+  />
+);
 Story.storyName = 'Test';

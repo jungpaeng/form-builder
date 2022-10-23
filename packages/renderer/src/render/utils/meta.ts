@@ -31,8 +31,8 @@ export type FieldData = {
   viewMode?: boolean;
 };
 
-export function normalizeMetaWidget({ fields }: MetaData) {
-  const normalizeFields: FieldData[] = fields.map((field) => {
+export function normalizeMetaWidget(meta: MetaData): MetaData {
+  const normalizeFields: FieldData[] = meta.fields.map((field) => {
     const widget = getWidget(field.widget!);
     const viewWidget = getWidget(field.viewWidget!);
 
@@ -52,5 +52,5 @@ export function normalizeMetaWidget({ fields }: MetaData) {
     return { ...field, widget, viewWidget };
   });
 
-  return { fields: normalizeFields };
+  return { ...meta, fields: normalizeFields };
 }
