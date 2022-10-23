@@ -6,7 +6,18 @@ export default {
   meta: { key: 'value' },
 };
 
-const { Renderer } = renderer();
+const { Renderer } = renderer({
+  plugins: [
+    () => {
+      return {
+        key: 'plugin-1',
+        onInit() {
+          console.log('plugin-1 onInit');
+        },
+      };
+    },
+  ],
+});
 
 export const Story = () => (
   <div>
