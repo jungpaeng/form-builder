@@ -1470,6 +1470,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-unused-imports: ^2.0.0
     react: ^18.2.0
+    react-hook-form: ^7.38.0
   languageName: unknown
   linkType: soft
 
@@ -7282,6 +7283,15 @@ __metadata:
     react: ">= 16.3"
     react-dom: ">= 16.3"
   checksum: 1843c48dce41a0af03590dd7351baaf8a68ecac4e850d9819d093517a34d1097668c2b2cd809a8f5cd70791c011c6f2dcaf90d43b6e773b33c212f1f4cf17f55
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.38.0":
+  version: 7.38.0
+  resolution: "react-hook-form@npm:7.38.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 16d5f117e39ec09f73def706fb4e189aa11e19191231082fe7e15481701beb2b81260581012db8939799d8011a6132561659dd864b08270691353e134c4f06b0
   languageName: node
   linkType: hard
 

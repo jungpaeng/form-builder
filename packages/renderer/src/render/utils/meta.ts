@@ -1,6 +1,6 @@
 import { getWidget, WidgetKey, widgetMap } from './widget';
 
-export type MetaData = {
+export type MetaData<MetaExtension extends Record<string, unknown> = {}> = MetaExtension & {
   /**
    * @description Form에 대한 필드를 정의하는 부분
    */

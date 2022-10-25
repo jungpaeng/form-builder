@@ -6,16 +6,18 @@ import { FormRender, FormRenderProps } from './render/components';
 import { defineWidget } from './render/utils';
 import { BeforeRenderAction } from './types';
 
-export type RendererOptions = {
+export type RendererOptions<MetaExtension extends Record<string, unknown> = {}> = {
   beforeRender?: Array<BeforeRenderAction | BeforeRenderAction[]>;
-  plugins?: Array<RendererPlugin | RendererPlugin[]>;
+  plugins?: Array<RendererPlugin<MetaExtension> | RendererPlugin<MetaExtension>[]>;
 };
 
-export type RendererOutput = {
-  Renderer: React.FC<FormRenderProps>;
+export type RendererOutput<MetaExtension extends Record<string, unknown> = {}> = {
+  Renderer: React.FC<FormRenderProps<MetaExtension>>;
 };
 
-export function renderer(options: RendererOptions): RendererOutput {
+export function renderer<MetaExtension extends Record<string, unknown> = {}>(
+  options: RendererOptions<MetaExtension>
+): RendererOutput<MetaExtension> {
   const plugins = (options.plugins ?? [])
     .reduce((prev: RendererPlugin[], curr) => {
       if (Array.isArray(curr)) return [...prev, ...curr];
