@@ -1,20 +1,8 @@
-import { FieldData } from './meta';
-
 export type WidgetKey = React.ElementType | string;
-type Widget = {
-  /**
-   * @description
-   */
-  widget: React.ElementType;
-  /**
-   * @description field를 변환하는 함수
-   */
-  metaConvertor?(field: FieldData): FieldData;
-};
 
-export const widgetMap: Record<string, Widget> = {};
+export const widgetMap: Record<string, React.ElementType> = {};
 
-export function defineWidget(name: string, widgetValue: Widget) {
+export function defineWidget(name: string, widgetValue: React.ElementType) {
   if (widgetMap[name]) throw new Error(`widget ${name} is already defined`);
   widgetMap[name] = widgetValue;
 }
@@ -26,6 +14,6 @@ export function defineWidget(name: string, widgetValue: Widget) {
 export function getWidget(widget: WidgetKey) {
   if (typeof widget !== 'string') return widget;
 
-  if (!widgetMap[widget].widget) throw new Error(`widget ${widget} is not defined`);
-  return widgetMap[widget].widget;
+  if (!widgetMap[widget]) throw new Error(`widget ${widget} is not defined`);
+  return widgetMap[widget];
 }
