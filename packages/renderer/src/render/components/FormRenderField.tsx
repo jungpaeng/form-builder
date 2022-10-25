@@ -1,31 +1,45 @@
 import React from 'react';
 
-import { usePluginContext } from '../../plugins';
-import { NormalizedMetaData, NormalizedFieldData } from '../utils/meta';
+import { RendererPlugin, usePluginContext } from '../../plugins';
+import { NormalizedMetaData } from '../utils/meta';
 
 type FormRenderFieldProps<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
 > = {
   meta: NormalizedMetaData<MetaExtension, FieldExtension>;
-  field: NormalizedFieldData<FieldExtension>;
+  plugin: ReturnType<RendererPlugin>;
 };
 
 export function FormRenderField<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
->({ field }: FormRenderFieldProps<MetaExtension, FieldExtension>) {
-  const plugin = usePluginContext();
+>({ meta, plugin }: FormRenderFieldProps<MetaExtension, FieldExtension>) {
+  const plugins = usePluginContext();
 
-  let outputNode = <>{!!field.widget ? <field.widget /> : null}</>;
+  return plugin.draw!({
+    meta,
+    render() {
+      return {
+        fields: meta.fields.map((field) => {
+          return {
+            field,
+            render() {
+              let outputNode = <>{!!field.widget ? <field.widget /> : null}</>;
 
-  plugin.forEach((plugin) => {
-    outputNode =
-      plugin.wrapField?.({
-        field: field,
-        render: () => outputNode,
-      }) ?? outputNode;
+              plugins.forEach((plugin) => {
+                outputNode =
+                  plugin.wrapField?.({
+                    field: field,
+                    render: () => outputNode,
+                  }) ?? outputNode;
+              });
+
+              return outputNode;
+            },
+          };
+        }),
+      };
+    },
   });
-
-  return outputNode;
 }
