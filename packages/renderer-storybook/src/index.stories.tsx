@@ -12,20 +12,11 @@ const { Renderer } = renderer({
       defineWidget('input', { widget: 'input' });
     },
   ],
-  plugins: [
-    () => {
-      return {
-        key: 'wrap - stack',
-        wrapRender({ render }) {
-          return <CountWrapper>{render()}</CountWrapper>;
-        },
-      };
-    },
-  ],
+  plugins: [formBuilderPlugin()],
 });
 
 export const Story = () => (
-  <div>
+  <>
     <Renderer
       meta={{
         fields: [
@@ -34,7 +25,7 @@ export const Story = () => (
         ],
       }}
     />
-  </div>
+  </>
 );
 
 Story.storyName = 'FormBuilder';
