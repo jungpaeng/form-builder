@@ -1453,10 +1453,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@form-builder/plugin-form-builder@workspace:extensions/plugin-form-builder":
+"@form-builder/plugin-form-builder@workspace:^, @form-builder/plugin-form-builder@workspace:extensions/plugin-form-builder":
   version: 0.0.0-use.local
   resolution: "@form-builder/plugin-form-builder@workspace:extensions/plugin-form-builder"
   dependencies:
+    "@form-builder/renderer": "workspace:^"
     "@types/react": ^18.0.21
     "@typescript-eslint/eslint-plugin": ^5.40.1
     concurrently: ^7.5.0
@@ -1476,6 +1477,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@form-builder/renderer-storybook@workspace:packages/renderer-storybook"
   dependencies:
+    "@form-builder/plugin-form-builder": "workspace:^"
     "@form-builder/renderer": "workspace:^"
     "@ladle/react": ^2.4.5
     "@types/react": ^18.0.21
