@@ -2,6 +2,10 @@ import React from 'react';
 
 import { NormalizedFieldData, NormalizedMetaData } from '../../render/utils/meta';
 
+export type DrawRenderArgs = {
+  props?: Record<string, unknown>;
+};
+
 export type RendererPlugin<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
@@ -36,7 +40,7 @@ export type RendererPlugin<
     render(): {
       fields: Array<{
         field: NormalizedFieldData<FieldExtension>;
-        render(): React.ReactNode;
+        render(args?: DrawRenderArgs): React.ReactNode;
       }>;
     };
   }): React.ReactElement | null;

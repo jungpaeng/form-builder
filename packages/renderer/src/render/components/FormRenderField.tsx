@@ -24,8 +24,8 @@ export function FormRenderField<
         fields: meta.fields.map((field) => {
           return {
             field,
-            render() {
-              let outputNode = <>{!!field.widget ? <field.widget /> : null}</>;
+            render(args) {
+              let outputNode = <>{!!field.widget ? <field.widget {...args?.props} /> : null}</>;
 
               plugins.forEach((plugin) => {
                 outputNode =

@@ -19,11 +19,7 @@ export function formBuilderPlugin(): RendererPlugin<MetaExtension> {
             onInValidSubmit={meta.formBuilder.onInValidSubmit}
           >
             {render().fields.map(({ field, render }) => {
-              return (
-                <FormFieldWrap key={field.key} formKey={field.key}>
-                  {render()}
-                </FormFieldWrap>
-              );
+              return <FormFieldWrap key={field.key} formKey={field.key} render={render} />;
             })}
           </FormBuilder>
         );

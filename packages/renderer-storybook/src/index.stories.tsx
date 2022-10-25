@@ -7,9 +7,7 @@ export default { title: 'Welcome', meta: { key: 'value' } };
 const { Renderer } = renderer({
   beforeRender: [
     ({ actions: { defineWidget } }) => {
-      defineWidget('div', () => <p>div widget</p>);
-      defineWidget('span', () => <p>span widget</p>);
-      defineWidget('input', () => <p>input widget</p>);
+      defineWidget('input', 'input');
       defineWidget('submit', () => <button type="submit">submit</button>);
     },
   ],
@@ -25,10 +23,9 @@ export const Story = () => (
         },
       },
       fields: [
-        { key: 'fields-div', widget: 'div' },
-        { key: 'fields-span', widget: 'span' },
-        { key: 'fields-input', widget: 'input' },
-        { key: 'fields-submit', widget: 'submit' },
+        { key: 'fields-input-1', widget: 'input' },
+        { key: 'fields-input-2', widget: 'input' },
+        { key: 'fields-input-3', widget: 'input' },
       ],
     }}
   />
