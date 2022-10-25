@@ -2745,7 +2745,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:7.31.10"],\
             ["eslint-plugin-react-hooks", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:4.6.0"],\
             ["eslint-plugin-unused-imports", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.0.0"],\
-            ["react", "npm:18.2.0"]\
+            ["react", "npm:18.2.0"],\
+            ["react-hook-form", "virtual:07173be9f3714551c88eee1de9c600e154af4be9b244f0c523c0c31edace921b86555739497e3f31f1dbb5c4eab5021c039e944b927002d1a9fa043341ab5dce#npm:7.38.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -9855,6 +9856,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/react",\
             "prop-types",\
             "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-hook-form", [\
+        ["npm:7.38.0", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.38.0-72b65c1bad-16d5f117e3.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "npm:7.38.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:07173be9f3714551c88eee1de9c600e154af4be9b244f0c523c0c31edace921b86555739497e3f31f1dbb5c4eab5021c039e944b927002d1a9fa043341ab5dce#npm:7.38.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-f76a8744dd/0/cache/react-hook-form-npm-7.38.0-72b65c1bad-16d5f117e3.zip/node_modules/react-hook-form/",\
+          "packageDependencies": [\
+            ["react-hook-form", "virtual:07173be9f3714551c88eee1de9c600e154af4be9b244f0c523c0c31edace921b86555739497e3f31f1dbb5c4eab5021c039e944b927002d1a9fa043341ab5dce#npm:7.38.0"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
             "react"\
           ],\
           "linkType": "HARD"\

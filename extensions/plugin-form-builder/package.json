@@ -35,6 +35,7 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@form-builder/renderer": "workspace:^"
+    "@form-builder/renderer": "workspace:^",
+    "react-hook-form": "^7.38.0"
   }
 }
