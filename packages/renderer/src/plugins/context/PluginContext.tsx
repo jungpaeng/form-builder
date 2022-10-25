@@ -8,7 +8,11 @@ export type FormBuilderRendererPlugin = () => {
   /**
    * @description Renderer 컴포넌트가 처음 호출될 때 실행됩니다.
    */
-  onInit?: () => void;
+  onInit?(): void;
+  /**
+   * @description Render 컴포넌트를 Provider 또는 커스텀 컴포넌트로 감싸는 기능을 제공합니다.
+   */
+  wrapRender?(args: { render(): React.ReactNode }): React.ReactElement | null;
 };
 
 type PluginContextValue = Array<ReturnType<FormBuilderRendererPlugin>>;
