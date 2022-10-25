@@ -20,6 +20,7 @@ export function formBuilderPlugin(): RendererPlugin<MetaExtension> {
             onInValidSubmit={meta.formBuilder.onInValidSubmit}
           >
             {render()}
+            <button type="submit">submit</button>
           </FormBuilder>
         );
       },
