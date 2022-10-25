@@ -2,6 +2,7 @@ import { RendererPlugin } from '@form-builder/renderer';
 import React from 'react';
 
 import { FormBuilder, FormBuilderProps } from './components';
+import { FormFieldWrap } from './components/FormFieldWrap';
 
 type MetaExtension = {
   formBuilder: FormBuilderProps;
@@ -22,8 +23,8 @@ export function formBuilderPlugin(): RendererPlugin<MetaExtension> {
           </FormBuilder>
         );
       },
-      wrapField({ render }) {
-        return <div className="form-builder-field">{render()}</div>;
+      wrapField({ field, render }) {
+        return <FormFieldWrap formKey={field.key}>{render()}</FormFieldWrap>;
       },
     };
   };
