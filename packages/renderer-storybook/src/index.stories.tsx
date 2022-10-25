@@ -26,6 +26,7 @@ export const Story = () => (
         { key: 'fields-input-1', widget: 'input' },
         { key: 'fields-input-2', widget: 'input' },
         { key: 'fields-input-3', widget: 'input' },
+        { key: 'fields-submit', widget: 'submit', isNotForm: true },
       ],
     }}
   />

@@ -3,11 +3,15 @@ import React from 'react';
 
 import { FormBuilder, FormBuilderProps, FormFieldWrap } from './components';
 
-type MetaExtension = {
+export type MetaExtension = {
   formBuilder: FormBuilderProps;
 };
 
-export function formBuilderPlugin(): RendererPlugin<MetaExtension> {
+export type FieldExtension = {
+  isNotForm?: boolean;
+};
+
+export function formBuilderPlugin(): RendererPlugin<MetaExtension, FieldExtension> {
   return () => {
     return {
       key: 'form-builder',
@@ -19,7 +23,7 @@ export function formBuilderPlugin(): RendererPlugin<MetaExtension> {
             onInValidSubmit={meta.formBuilder.onInValidSubmit}
           >
             {render().fields.map(({ field, render }) => {
-              return <FormFieldWrap key={field.key} formKey={field.key} render={render} />;
+              return <FormFieldWrap key={field.key} field={field} render={render} />;
             })}
           </FormBuilder>
         );
