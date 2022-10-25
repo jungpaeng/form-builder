@@ -4,14 +4,14 @@ import { defineWidget, getWidget, widgetMap } from './widget';
 
 describe('widget', function () {
   beforeAll(function () {
-    defineWidget('div', { widget: 'div' });
-    defineWidget('input', { widget: Input });
+    defineWidget('div', 'div');
+    defineWidget('input', Input);
   });
 
   it('should be set widgetMap', function () {
     expect(widgetMap).toEqual({
-      div: { widget: 'div' },
-      input: { widget: Input },
+      div: 'div',
+      input: Input,
     });
   });
 

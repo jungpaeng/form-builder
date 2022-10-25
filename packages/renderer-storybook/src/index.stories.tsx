@@ -7,10 +7,10 @@ export default { title: 'Welcome', meta: { key: 'value' } };
 const { Renderer } = renderer({
   beforeRender: [
     ({ actions: { defineWidget } }) => {
-      defineWidget('div', { widget: () => <p>div widget</p> });
-      defineWidget('span', { widget: () => <p>span widget</p> });
-      defineWidget('input', { widget: () => <p>input widget</p> });
-      defineWidget('submit', { widget: () => <button type="submit">submit</button> });
+      defineWidget('div', () => <p>div widget</p>);
+      defineWidget('span', () => <p>span widget</p>);
+      defineWidget('input', () => <p>input widget</p>);
+      defineWidget('submit', () => <button type="submit">submit</button>);
     },
   ],
   plugins: [formBuilderPlugin()],

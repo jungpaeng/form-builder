@@ -1,4 +1,4 @@
-import { getWidget, WidgetKey, widgetMap } from './widget';
+import { getWidget, WidgetKey } from './widget';
 
 export type MetaData<
   MetaExtension extends Record<string, unknown> = {},
@@ -23,19 +23,7 @@ export type FieldData<FieldExtension extends Record<string, unknown> = {}> = Fie
 
 export function normalizeMetaWidget(meta: MetaData) {
   const normalizeFields = meta.fields.map((field) => {
-    const widget = getWidget(field.widget!);
-    const currentItemKey = Object.keys(widgetMap).find((item) => item === field.widget);
-
-    if (currentItemKey && widgetMap[currentItemKey]?.metaConvertor) {
-      const newField = widgetMap[currentItemKey].metaConvertor!(field);
-
-      if (!newField) {
-        throw new Error(`metaConvertor of ${field.widget} must return a value`);
-      }
-      return { ...newField, widget };
-    }
-
-    return { ...field, widget };
+    return { ...field, widget: getWidget(field.widget!) };
   });
 
   return { ...meta, fields: normalizeFields };
