@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type FormBuilderRendererPlugin = () => {
+export type RendererPlugin = () => {
   /**
    * @description 플러그인이 React Tree로 흡수될 때 부여되는 고유한 키
    */
@@ -15,7 +15,7 @@ export type FormBuilderRendererPlugin = () => {
   wrapRender?(args: { render(): React.ReactNode }): React.ReactElement | null;
 };
 
-type PluginContextValue = Array<ReturnType<FormBuilderRendererPlugin>>;
+type PluginContextValue = Array<ReturnType<RendererPlugin>>;
 
 export const PluginContext = React.createContext<PluginContextValue>([]);
 

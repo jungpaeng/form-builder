@@ -1,10 +1,8 @@
+import { formBuilderPlugin } from '@form-builder/plugin-form-builder';
 import { renderer } from '@form-builder/renderer';
 import React from 'react';
 
-export default {
-  title: 'Welcome',
-  meta: { key: 'value' },
-};
+export default { title: 'Welcome', meta: { key: 'value' } };
 
 const { Renderer } = renderer({
   beforeRender: [
@@ -26,18 +24,6 @@ const { Renderer } = renderer({
   ],
 });
 
-function CountWrapper({ children }: React.PropsWithChildren) {
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount((curr) => curr + 1)}>Add</button>
-      <div>{children}</div>
-    </div>
-  );
-}
-
 export const Story = () => (
   <div>
     <Renderer
@@ -50,4 +36,5 @@ export const Story = () => (
     />
   </div>
 );
-Story.storyName = 'Test';
+
+Story.storyName = 'FormBuilder';
