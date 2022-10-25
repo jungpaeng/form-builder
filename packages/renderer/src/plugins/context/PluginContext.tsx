@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FieldData, MetaData } from '../../render/utils/meta';
+import { NormalizedFieldData, NormalizedMetaData } from '../../render/utils/meta';
 
 export type RendererPlugin<
   MetaExtension extends Record<string, unknown> = {},
@@ -18,10 +18,13 @@ export type RendererPlugin<
    * @description Render 컴포넌트를 Provider 또는 커스텀 컴포넌트로 감싸는 기능을 제공합니다.
    */
   wrapRender?(args: {
-    meta: MetaData<MetaExtension, FieldExtension>;
+    meta: NormalizedMetaData<MetaExtension, FieldExtension>;
     render(): React.ReactNode;
   }): React.ReactElement | null;
-  wrapField?(args: { field: FieldData<FieldExtension>; render(): React.ReactNode }): React.ReactElement | null;
+  wrapField?(args: {
+    field: NormalizedFieldData<FieldExtension>;
+    render(): React.ReactNode;
+  }): React.ReactElement | null;
 };
 
 type PluginContextValue = Array<ReturnType<RendererPlugin>>;

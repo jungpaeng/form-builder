@@ -32,7 +32,7 @@ export function FormRender<
   plugin.forEach((plugin) => {
     outputNode =
       plugin.wrapRender?.({
-        meta: metaData,
+        meta: normalizedMetaWidget,
         render: () => outputNode,
       }) ?? outputNode;
   });

@@ -1,19 +1,20 @@
 import React from 'react';
 
 import { usePluginContext } from '../../plugins';
-import { FieldData, MetaData } from '../utils/meta';
+import { NormalizedMetaData, NormalizedFieldData } from '../utils/meta';
 
 type FormRenderFieldProps<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
 > = {
-  meta: MetaData<MetaExtension, FieldExtension>;
-  field: FieldData<FieldExtension>;
+  meta: NormalizedMetaData<MetaExtension, FieldExtension>;
+  field: NormalizedFieldData<FieldExtension>;
 };
 
-export function FormRenderField<FieldExtension extends Record<string, unknown> = {}>({
-  field,
-}: FormRenderFieldProps<FieldExtension>) {
+export function FormRenderField<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+>({ field }: FormRenderFieldProps<MetaExtension, FieldExtension>) {
   const plugin = usePluginContext();
 
   let outputNode = <>{!!field.widget ? <field.widget /> : null}</>;

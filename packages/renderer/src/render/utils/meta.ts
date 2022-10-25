@@ -9,6 +9,7 @@ export type MetaData<
    */
   fields: FieldData<FieldExtension>[];
 };
+
 export type FieldData<FieldExtension extends Record<string, unknown> = {}> = FieldExtension & {
   /**
    * @description ReactNode의 키로 사용됩니다.
@@ -21,7 +22,22 @@ export type FieldData<FieldExtension extends Record<string, unknown> = {}> = Fie
   widget?: WidgetKey;
 };
 
-export function normalizeMetaWidget(meta: MetaData) {
+export type NormalizedMetaData<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+> = MetaExtension & {
+  fields: NormalizedFieldData<FieldExtension>[];
+};
+
+export type NormalizedFieldData<FieldExtension extends Record<string, unknown> = {}> = FieldExtension & {
+  key: string;
+  widget?: WidgetKey;
+};
+
+export function normalizeMetaWidget<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+>(meta: MetaData<MetaExtension, FieldExtension>): NormalizedMetaData<MetaExtension, FieldExtension> {
   const normalizeFields = meta.fields.map((field) => {
     return { ...field, widget: getWidget(field.widget!) };
   });
