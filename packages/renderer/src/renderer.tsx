@@ -1,24 +1,23 @@
 import React from 'react';
 
 import { EffectManager } from './effects';
-import { FormBuilderRendererPlugin, PluginContext } from './plugins';
+import { RendererPlugin, PluginContext } from './plugins';
 import { FormRender, FormRenderProps } from './render/components';
 import { defineWidget } from './render/utils';
+import { BeforeRenderAction } from './types';
 
-export type BeforeRenderAction = (args: {
-  actions: {
-    defineWidget: typeof defineWidget;
-  };
-}) => void;
-
-export type FormBuilderRendererOptions = {
+export type RendererOptions = {
   beforeRender?: Array<BeforeRenderAction | BeforeRenderAction[]>;
-  plugins?: Array<FormBuilderRendererPlugin | FormBuilderRendererPlugin[]>;
+  plugins?: Array<RendererPlugin | RendererPlugin[]>;
 };
 
-export function renderer(options: FormBuilderRendererOptions) {
+export type RendererOutput = {
+  Renderer: React.FC<FormRenderProps>;
+};
+
+export function renderer(options: RendererOptions): RendererOutput {
   const plugins = (options.plugins ?? [])
-    .reduce((prev: FormBuilderRendererPlugin[], curr) => {
+    .reduce((prev: RendererPlugin[], curr) => {
       if (Array.isArray(curr)) return [...prev, ...curr];
       return [...prev, curr];
     }, [])
@@ -32,7 +31,7 @@ export function renderer(options: FormBuilderRendererOptions) {
     .forEach((item) => item?.({ actions: { defineWidget } }));
 
   return {
-    Renderer(formRenderProps: FormRenderProps) {
+    Renderer(formRenderProps) {
       return (
         <PluginContext.Provider value={plugins}>
           <FormRender {...formRenderProps} />

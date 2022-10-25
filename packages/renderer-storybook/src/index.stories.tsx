@@ -1,10 +1,8 @@
+import { formBuilderPlugin } from '@form-builder/plugin-form-builder';
 import { renderer } from '@form-builder/renderer';
 import React from 'react';
 
-export default {
-  title: 'Welcome',
-  meta: { key: 'value' },
-};
+export default { title: 'Welcome', meta: { key: 'value' } };
 
 const { Renderer } = renderer({
   beforeRender: [
@@ -14,16 +12,20 @@ const { Renderer } = renderer({
       defineWidget('input', { widget: 'input' });
     },
   ],
+  plugins: [formBuilderPlugin()],
 });
 
 export const Story = () => (
-  <Renderer
-    meta={{
-      fields: [
-        { key: 'fields-1', widget: 'div' },
-        { key: 'fields-2', widget: 'span' },
-      ],
-    }}
-  />
+  <>
+    <Renderer
+      meta={{
+        fields: [
+          { key: 'fields-1', widget: 'div' },
+          { key: 'fields-2', widget: 'span' },
+        ],
+      }}
+    />
+  </>
 );
-Story.storyName = 'Test';
+
+Story.storyName = 'FormBuilder';

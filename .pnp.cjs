@@ -16,6 +16,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:."\
       },\
       {\
+        "name": "@form-builder/plugin-form-builder",\
+        "reference": "workspace:extensions/plugin-form-builder"\
+      },\
+      {\
         "name": "@form-builder/renderer",\
         "reference": "workspace:packages/renderer"\
       },\
@@ -27,6 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
+      ["@form-builder/plugin-form-builder", ["workspace:extensions/plugin-form-builder"]],\
       ["@form-builder/renderer", ["workspace:packages/renderer"]],\
       ["@form-builder/renderer-storybook", ["workspace:packages/renderer-storybook"]],\
       ["form-builder", ["workspace:."]]\
@@ -2723,6 +2728,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@form-builder/plugin-form-builder", [\
+        ["workspace:extensions/plugin-form-builder", {\
+          "packageLocation": "./extensions/plugin-form-builder/",\
+          "packageDependencies": [\
+            ["@form-builder/plugin-form-builder", "workspace:extensions/plugin-form-builder"],\
+            ["@form-builder/renderer", "workspace:packages/renderer"],\
+            ["@types/react", "npm:18.0.21"],\
+            ["@typescript-eslint/eslint-plugin", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:5.40.1"],\
+            ["concurrently", "npm:7.5.0"],\
+            ["dts-bundle-generator", "npm:7.0.0"],\
+            ["esbuild", "npm:0.15.12"],\
+            ["esbuild-node-externals", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:1.5.0"],\
+            ["eslint-plugin-import", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.26.0"],\
+            ["eslint-plugin-prettier", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:4.2.1"],\
+            ["eslint-plugin-react", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:7.31.10"],\
+            ["eslint-plugin-react-hooks", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:4.6.0"],\
+            ["eslint-plugin-unused-imports", "virtual:f02a8ecf3109d1ab405cd5f84b24b445f27d363d08f3e17c039300aa8f42f857d5300025f4d0e707f7227217f2f025863a19d12e97af7832b99746a7a03ebf77#npm:2.0.0"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@form-builder/renderer", [\
         ["workspace:packages/renderer", {\
           "packageLocation": "./packages/renderer/",\
@@ -2753,6 +2780,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/renderer-storybook/",\
           "packageDependencies": [\
             ["@form-builder/renderer-storybook", "workspace:packages/renderer-storybook"],\
+            ["@form-builder/plugin-form-builder", "workspace:extensions/plugin-form-builder"],\
             ["@form-builder/renderer", "workspace:packages/renderer"],\
             ["@ladle/react", "virtual:cc3848410571e20b4515160cf85b347ed23be98fc861314276aa86988f9f9ada816464c01a64f3f4228395c73c7ebdfd6a06edf5c36538f2c3aa6ece3b50a203#npm:2.4.5"],\
             ["@types/react", "npm:18.0.21"],\

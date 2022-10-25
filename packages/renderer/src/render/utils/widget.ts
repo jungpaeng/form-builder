@@ -7,7 +7,7 @@ type Widget = {
    */
   widget: React.ElementType;
   /**
-   * @description field의 widget 또는 viewWidget을 변환하는 함수입니다.
+   * @description field를 변환하는 함수
    */
   metaConvertor?(field: FieldData): FieldData;
 };

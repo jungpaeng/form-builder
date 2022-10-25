@@ -5,10 +5,6 @@ export type MetaData = {
    * @description Form에 대한 필드를 정의하는 부분
    */
   fields: FieldData[];
-  /**
-   * @description 전체 폼에 viewMode를 적용시킵니다.
-   */
-  viewMode?: boolean;
 };
 export type FieldData = {
   /**
@@ -20,25 +16,12 @@ export type FieldData = {
    * @description 기본 모드일 때 보여지는 위젯
    */
   widget?: WidgetKey;
-  /**
-   * @description widgetMap에서 조회하기 위한 위젯 키
-   * @description 뷰 모드일 때 보여지는 위젯
-   */
-  viewWidget?: WidgetKey;
-  /**
-   * @description 해당 필드에 viewMode를 적용시킵니다.
-   */
-  viewMode?: boolean;
 };
 
-export function normalizeMetaWidget(meta: MetaData): MetaData {
-  const normalizeFields: FieldData[] = meta.fields.map((field) => {
+export function normalizeMetaWidget(meta: MetaData) {
+  const normalizeFields = meta.fields.map((field) => {
     const widget = getWidget(field.widget!);
-    const viewWidget = getWidget(field.viewWidget!);
-
-    const currentItemKey = Object.keys(widgetMap).find((item) => {
-      return item === field.widget;
-    });
+    const currentItemKey = Object.keys(widgetMap).find((item) => item === field.widget);
 
     if (currentItemKey && widgetMap[currentItemKey]?.metaConvertor) {
       const newField = widgetMap[currentItemKey].metaConvertor!(field);
@@ -46,10 +29,10 @@ export function normalizeMetaWidget(meta: MetaData): MetaData {
       if (!newField) {
         throw new Error(`metaConvertor of ${field.widget} must return a value`);
       }
-      return { ...newField, widget, viewWidget };
+      return { ...newField, widget };
     }
 
-    return { ...field, widget, viewWidget };
+    return { ...field, widget };
   });
 
   return { ...meta, fields: normalizeFields };
