@@ -3,6 +3,7 @@
   "packageManager": "yarn@3.2.4",
   "workspaces": [
     "packages/**/*",
+    "extensions/**/*",
     "services/**/*"
   ],
   "scripts": {
