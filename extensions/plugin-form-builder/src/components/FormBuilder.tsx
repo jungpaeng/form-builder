@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 
-type FormBuilderProps = {
+export type FormBuilderProps = {
   /**
    * @description 렌더링할 컴포넌트를 주입합니다.
    * @description `onSubmit`이 `props`로 주입됩니다.
