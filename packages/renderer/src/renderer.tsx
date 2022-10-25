@@ -6,18 +6,25 @@ import { FormRender, FormRenderProps } from './render/components';
 import { defineWidget } from './render/utils';
 import { BeforeRenderAction } from './types';
 
-export type RendererOptions<MetaExtension extends Record<string, unknown> = {}> = {
+export type RendererOptions<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+> = {
   beforeRender?: Array<BeforeRenderAction | BeforeRenderAction[]>;
-  plugins?: Array<RendererPlugin<MetaExtension> | RendererPlugin<MetaExtension>[]>;
+  plugins?: Array<RendererPlugin<MetaExtension, FieldExtension> | RendererPlugin<MetaExtension, FieldExtension>[]>;
 };
 
-export type RendererOutput<MetaExtension extends Record<string, unknown> = {}> = {
-  Renderer: React.FC<FormRenderProps<MetaExtension>>;
+export type RendererOutput<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+> = {
+  Renderer: React.FC<FormRenderProps<MetaExtension, FieldExtension>>;
 };
 
-export function renderer<MetaExtension extends Record<string, unknown> = {}>(
-  options: RendererOptions<MetaExtension>
-): RendererOutput<MetaExtension> {
+export function renderer<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+>(options: RendererOptions<MetaExtension, FieldExtension>): RendererOutput<MetaExtension, FieldExtension> {
   const plugins = (options.plugins ?? [])
     .reduce((prev: RendererPlugin[], curr) => {
       if (Array.isArray(curr)) return [...prev, ...curr];

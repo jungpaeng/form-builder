@@ -1,12 +1,15 @@
 import { getWidget, WidgetKey, widgetMap } from './widget';
 
-export type MetaData<MetaExtension extends Record<string, unknown> = {}> = MetaExtension & {
+export type MetaData<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+> = MetaExtension & {
   /**
    * @description Form에 대한 필드를 정의하는 부분
    */
-  fields: FieldData[];
+  fields: FieldData<FieldExtension>[];
 };
-export type FieldData = {
+export type FieldData<FieldExtension extends Record<string, unknown> = {}> = FieldExtension & {
   /**
    * @description ReactNode의 키로 사용됩니다.
    */

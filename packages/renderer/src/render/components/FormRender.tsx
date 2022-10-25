@@ -4,13 +4,17 @@ import { usePluginContext } from '../../plugins';
 import { MetaData, normalizeMetaWidget } from '../utils/meta';
 import { FormRenderField } from './FormRenderField';
 
-export type FormRenderProps<MetaExtension extends Record<string, unknown> = {}> = {
-  meta: MetaData<MetaExtension> | (() => MetaData<MetaExtension>);
+export type FormRenderProps<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+> = {
+  meta: MetaData<MetaExtension, FieldExtension> | (() => MetaData<MetaExtension, FieldExtension>);
 };
 
-export function FormRender<MetaExtension extends Record<string, unknown> = {}>({
-  meta,
-}: FormRenderProps<MetaExtension>) {
+export function FormRender<
+  MetaExtension extends Record<string, unknown> = {},
+  FieldExtension extends Record<string, unknown> = {}
+>({ meta }: FormRenderProps<MetaExtension, FieldExtension>) {
   const plugin = usePluginContext();
 
   const metaData = typeof meta === 'function' ? meta() : meta;
