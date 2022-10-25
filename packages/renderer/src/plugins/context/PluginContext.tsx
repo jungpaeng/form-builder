@@ -2,6 +2,10 @@ import React from 'react';
 
 import { NormalizedFieldData, NormalizedMetaData } from '../../render/utils/meta';
 
+export type DrawRenderArgs = {
+  props?: Record<string, unknown>;
+};
+
 export type RendererPlugin<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
@@ -21,9 +25,24 @@ export type RendererPlugin<
     meta: NormalizedMetaData<MetaExtension, FieldExtension>;
     render(): React.ReactNode;
   }): React.ReactElement | null;
+  /**
+   * @description Field 컴포넌트를 Provider 또는 커스텀 컴포넌트로 감싸는 기능을 제공합니다.
+   */
   wrapField?(args: {
     field: NormalizedFieldData<FieldExtension>;
     render(): React.ReactNode;
+  }): React.ReactElement | null;
+  /**
+   * @description meta 정보를 바탕으로 실제 돔에 렌더링될 컴포넌트를 반환합니다.
+   */
+  draw?(args: {
+    meta: NormalizedMetaData<MetaExtension, FieldExtension>;
+    render(): {
+      fields: Array<{
+        field: NormalizedFieldData<FieldExtension>;
+        render(args?: DrawRenderArgs): React.ReactNode;
+      }>;
+    };
   }): React.ReactElement | null;
 };
 

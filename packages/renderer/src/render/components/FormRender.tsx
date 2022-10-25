@@ -15,21 +15,22 @@ export function FormRender<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
 >({ meta }: FormRenderProps<MetaExtension, FieldExtension>) {
-  const plugin = usePluginContext();
+  const plugins = usePluginContext();
 
   const metaData = typeof meta === 'function' ? meta() : meta;
   const normalizedMetaWidget = normalizeMetaWidget(metaData);
 
-  const { fields } = normalizedMetaWidget;
   let outputNode: React.ReactElement = (
     <>
-      {fields.map((field) => {
-        return <FormRenderField key={field.key} meta={normalizedMetaWidget} field={field} />;
-      })}
+      {plugins
+        .filter((plugin) => !!plugin.draw)
+        .map((plugin) => {
+          return <FormRenderField key={plugin.key} meta={normalizedMetaWidget} plugin={plugin} />;
+        })}
     </>
   );
 
-  plugin.forEach((plugin) => {
+  plugins.forEach((plugin) => {
     outputNode =
       plugin.wrapRender?.({
         meta: normalizedMetaWidget,

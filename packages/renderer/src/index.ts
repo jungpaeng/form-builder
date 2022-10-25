@@ -1,2 +1,4 @@
-export { RendererPlugin } from './plugins';
+export { RendererPlugin, DrawRenderArgs } from './plugins';
+export * from './render';
+
 export * from './renderer';
