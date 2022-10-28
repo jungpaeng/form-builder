@@ -6,33 +6,40 @@ import { PluginContext, RendererPlugin } from './plugins';
 import { FormRender, FormRenderProps } from './render/components';
 import { TupleToIntersection, UnionToIntersection } from './types';
 
-type MetaValueValidator<T> = T extends RendererPlugin<infer M, Record<string, unknown>> ? M : never;
-type FieldValueValidator<T> = T extends RendererPlugin<Record<string, unknown>, infer F> ? F : never;
+type MetaValueValidator<PluginOption> = PluginOption extends RendererPlugin<infer Meta, never> ? Meta : never;
+type FieldValueValidator<PluginOption> = PluginOption extends RendererPlugin<never, infer Field> ? Field : never;
 
-type RendererOutput<T extends Array<RendererPlugin | RendererPlugin[]>> = {
+type RendererOutput<PluginOption extends Array<RendererPlugin | RendererPlugin[]>> = {
   Renderer: React.FC<
     FormRenderProps<
-      T extends Array<Array<infer _T>>
-        ? UnionToIntersection<MetaValueValidator<_T>>
+      PluginOption extends Array<Array<infer Value>>
+        ? UnionToIntersection<MetaValueValidator<Value>>
         : TupleToIntersection<{
-            [I in keyof T]: MetaValueValidator<T[I]>;
+            [Key in keyof PluginOption]: MetaValueValidator<PluginOption[Key]>;
           }>,
-      T extends Array<Array<infer _T>>
-        ? UnionToIntersection<FieldValueValidator<_T>>
+      PluginOption extends Array<Array<infer Value>>
+        ? UnionToIntersection<FieldValueValidator<Value>>
         : TupleToIntersection<{
-            [I in keyof T]: FieldValueValidator<T[I]>;
+            [Key in keyof PluginOption]: FieldValueValidator<PluginOption[Key]>;
           }>
     >
   >;
 };
 
-type DefineWidgetOption = (options: { defineWidget: CreateWidgetMapStoreOutput['setWidget'] }) => void;
+type DefineWidgetOption<WidgetOption extends Record<string, unknown> = {}> = (options: {
+  defineWidget: CreateWidgetMapStoreOutput<WidgetOption>['setWidget'];
+}) => void;
 
-export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
-  plugins?: [...T];
-  defineWidgets?: Array<DefineWidgetOption | DefineWidgetOption[]>;
-}): RendererOutput<T> {
-  const widgetMapStore = createWidgetMapStore();
+export function renderer<
+  DefineWidgets extends DefineWidgetOption<Record<string, unknown>>[],
+  PluginOption extends Array<RendererPlugin | RendererPlugin[]>
+>(options?: { plugins?: [...PluginOption]; defineWidgets?: [...DefineWidgets] }): RendererOutput<PluginOption> {
+  const widgetMapStore = createWidgetMapStore<
+    TupleToIntersection<{
+      [Key in keyof DefineWidgets]: DefineWidgets[Key] extends DefineWidgetOption<infer Value> ? Value : never;
+    }>
+  >();
+
   const plugins =
     options?.plugins
       ?.reduce((prev: RendererPlugin[], curr) => {
@@ -41,12 +48,9 @@ export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(opt
       }, [])
       .map((plugin) => plugin()) ?? [];
 
-  options?.defineWidgets
-    ?.reduce((prev: DefineWidgetOption[], curr) => {
-      if (Array.isArray(curr)) return [...prev, ...curr];
-      return [...prev, curr];
-    }, [])
-    .forEach((item) => item?.({ defineWidget: widgetMapStore.setWidget }));
+  options?.defineWidgets?.forEach((item) => {
+    item?.({ defineWidget: widgetMapStore.setWidget });
+  });
 
   return {
     Renderer(formRenderProps) {

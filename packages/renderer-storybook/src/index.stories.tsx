@@ -7,8 +7,8 @@ export default { title: 'Welcome', meta: { key: 'value' } };
 const { Renderer } = renderer({
   defineWidgets: [
     ({ defineWidget }) => {
-      defineWidget('input', 'input');
-      defineWidget('submit', () => <button type="submit">submit</button>);
+      defineWidget('input', { element: 'input' });
+      defineWidget('submit', { element: () => <button type="submit">submit</button> });
     },
   ],
   plugins: [formBuilderPlugin()],

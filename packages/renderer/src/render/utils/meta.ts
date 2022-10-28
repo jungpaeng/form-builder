@@ -42,7 +42,7 @@ export function normalizeMetaWidget<
   meta: MetaData<MetaExtension, FieldExtension>
 ): NormalizedMetaData<MetaExtension, FieldExtension> {
   const normalizeFields = meta.fields.map((field) => {
-    return { ...field, widget: getWidget(field.widget!) };
+    return { ...field, widget: getWidget(field.widget!)?.element };
   });
 
   return { ...meta, fields: normalizeFields };

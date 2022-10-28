@@ -1,19 +1,25 @@
-export type CreateWidgetMapStoreOutput = {
-  setWidget(name: string, widget: React.ElementType): void;
-  getWidget(widget: React.ElementType | string): undefined | React.ElementType;
+type WidgetValue<WidgetOption extends Record<string, unknown> = {}> = WidgetOption & {
+  element: React.ElementType;
 };
 
-export function createWidgetMapStore(): CreateWidgetMapStoreOutput {
-  const widgetMapStore: Record<string, React.ElementType> = {};
+export type CreateWidgetMapStoreOutput<WidgetOption extends Record<string, unknown> = {}> = {
+  setWidget(name: string, value: WidgetValue<WidgetOption>): void;
+  getWidget(widget: React.ElementType | string): WidgetValue<WidgetOption> | undefined;
+};
+
+export function createWidgetMapStore<
+  WidgetOption extends Record<string, unknown> = {}
+>(): CreateWidgetMapStoreOutput<WidgetOption> {
+  const widgetMapStore: Record<string, WidgetValue<WidgetOption>> = {};
 
   return {
-    setWidget(name: string, widget: React.ElementType) {
+    setWidget(name, option) {
       if (!widgetMapStore[name]) {
-        widgetMapStore[name] = widget;
+        widgetMapStore[name] = option;
       }
     },
-    getWidget(widget: React.ElementType | string) {
-      if (typeof widget !== 'string') return widget;
+    getWidget(widget) {
+      if (typeof widget !== 'string') return undefined;
       if (!widgetMapStore[widget]) return undefined;
 
       return widgetMapStore[widget];
