@@ -2,9 +2,9 @@ import React from 'react';
 
 import { EffectManager } from './effects';
 import { PluginContext, RendererPlugin } from './plugins';
-import { defineWidget } from './render';
+import { defineWidget, DefineWidget } from './render';
 import { FormRender, FormRenderProps } from './render/components';
-import { BeforeRenderAction, TupleToIntersection, UnionToIntersection } from './types';
+import { TupleToIntersection, UnionToIntersection } from './types';
 
 type MetaValueValidator<T> = T extends RendererPlugin<infer M, Record<string, unknown>> ? M : never;
 type FieldValueValidator<T> = T extends RendererPlugin<Record<string, unknown>, infer F> ? F : never;
@@ -26,9 +26,11 @@ type RendererOutput<T extends Array<RendererPlugin | RendererPlugin[]>> = {
   >;
 };
 
+type DefineWidgetOption = (options: { defineWidget: DefineWidget }) => void;
+
 export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
   plugins?: [...T];
-  beforeRender?: BeforeRenderAction[];
+  defineWidgets?: Array<DefineWidgetOption | DefineWidgetOption[]>;
 }): RendererOutput<T> {
   const plugins =
     options?.plugins
@@ -38,12 +40,12 @@ export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(opt
       }, [])
       .map((plugin) => plugin()) ?? [];
 
-  options?.beforeRender
-    ?.reduce((prev: BeforeRenderAction[], curr) => {
+  options?.defineWidgets
+    ?.reduce((prev: DefineWidgetOption[], curr) => {
       if (Array.isArray(curr)) return [...prev, ...curr];
       return [...prev, curr];
     }, [])
-    .forEach((item) => item?.({ actions: { defineWidget } }));
+    .forEach((item) => item?.({ defineWidget }));
 
   return {
     Renderer(formRenderProps) {

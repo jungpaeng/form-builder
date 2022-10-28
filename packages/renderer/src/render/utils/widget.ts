@@ -1,7 +1,7 @@
 export type WidgetKey = React.ElementType | string;
-
 export const widgetMap: Record<string, React.ElementType> = {};
 
+export type DefineWidget = (name: string, widget: React.ElementType) => void;
 export function defineWidget(name: string, widgetValue: React.ElementType) {
   if (widgetMap[name]) throw new Error(`widget ${name} is already defined`);
   widgetMap[name] = widgetValue;

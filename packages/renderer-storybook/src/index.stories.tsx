@@ -5,8 +5,8 @@ import React from 'react';
 export default { title: 'Welcome', meta: { key: 'value' } };
 
 const { Renderer } = renderer({
-  beforeRender: [
-    ({ actions: { defineWidget } }) => {
+  defineWidgets: [
+    ({ defineWidget }) => {
       defineWidget('input', 'input');
       defineWidget('submit', () => <button type="submit">submit</button>);
     },
