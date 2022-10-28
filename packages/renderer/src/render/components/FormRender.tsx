@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useWidgetMapStoreContext } from '../../context';
 import { usePluginContext } from '../../plugins';
 import { MetaData, normalizeMetaWidget } from '../utils/meta';
 import { FormRenderField } from './FormRenderField';
@@ -16,9 +17,10 @@ export function FormRender<
   FieldExtension extends Record<string, unknown> = {}
 >({ meta }: FormRenderProps<MetaExtension, FieldExtension>) {
   const plugins = usePluginContext();
+  const widgetMapStore = useWidgetMapStoreContext();
 
   const metaData = typeof meta === 'function' ? meta() : meta;
-  const normalizedMetaWidget = normalizeMetaWidget(metaData);
+  const normalizedMetaWidget = normalizeMetaWidget(widgetMapStore.getWidget, metaData);
 
   let outputNode: React.ReactElement = (
     <>

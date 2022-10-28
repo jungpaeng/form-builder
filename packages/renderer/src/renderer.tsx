@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { createWidgetMapStore, CreateWidgetMapStoreOutput, WidgetMapStoreContext } from './context';
 import { EffectManager } from './effects';
 import { PluginContext, RendererPlugin } from './plugins';
-import { defineWidget, DefineWidget } from './render';
 import { FormRender, FormRenderProps } from './render/components';
 import { TupleToIntersection, UnionToIntersection } from './types';
 
@@ -26,12 +26,13 @@ type RendererOutput<T extends Array<RendererPlugin | RendererPlugin[]>> = {
   >;
 };
 
-type DefineWidgetOption = (options: { defineWidget: DefineWidget }) => void;
+type DefineWidgetOption = (options: { defineWidget: CreateWidgetMapStoreOutput['setWidget'] }) => void;
 
 export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
   plugins?: [...T];
   defineWidgets?: Array<DefineWidgetOption | DefineWidgetOption[]>;
 }): RendererOutput<T> {
+  const widgetMapStore = createWidgetMapStore();
   const plugins =
     options?.plugins
       ?.reduce((prev: RendererPlugin[], curr) => {
@@ -45,15 +46,17 @@ export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(opt
       if (Array.isArray(curr)) return [...prev, ...curr];
       return [...prev, curr];
     }, [])
-    .forEach((item) => item?.({ defineWidget }));
+    .forEach((item) => item?.({ defineWidget: widgetMapStore.setWidget }));
 
   return {
     Renderer(formRenderProps) {
       return (
-        <PluginContext.Provider value={plugins}>
-          <FormRender {...formRenderProps} />
-          <EffectManager />
-        </PluginContext.Provider>
+        <WidgetMapStoreContext.Provider value={widgetMapStore}>
+          <PluginContext.Provider value={plugins}>
+            <FormRender {...formRenderProps} />
+            <EffectManager />
+          </PluginContext.Provider>
+        </WidgetMapStoreContext.Provider>
       );
     },
   };
