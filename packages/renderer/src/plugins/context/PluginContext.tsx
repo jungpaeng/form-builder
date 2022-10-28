@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NormalizedFieldData, NormalizedMetaData } from '../../render/utils/meta';
+import { NormalizedFieldData, NormalizedMetaData } from '../../render';
 
 export type DrawRenderArgs = {
   props?: Record<string, unknown>;
