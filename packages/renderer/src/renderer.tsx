@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { createWidgetMapStore, CreateWidgetMapStoreOutput, WidgetMapStoreContext } from './context';
 import { EffectManager } from './effects';
 import { PluginContext, RendererPlugin } from './plugins';
 import { FormRender, FormRenderProps } from './render/components';
@@ -26,20 +25,9 @@ type RendererOutput<PluginOption extends Array<RendererPlugin | RendererPlugin[]
   >;
 };
 
-type DefineWidgetOption<WidgetOption extends Record<string, unknown> = {}> = (options: {
-  defineWidget: CreateWidgetMapStoreOutput<WidgetOption>['setWidget'];
-}) => void;
-
-export function renderer<
-  DefineWidgets extends DefineWidgetOption<Record<string, unknown>>[],
-  PluginOption extends Array<RendererPlugin | RendererPlugin[]>
->(options?: { plugins?: [...PluginOption]; defineWidgets?: [...DefineWidgets] }): RendererOutput<PluginOption> {
-  const widgetMapStore = createWidgetMapStore<
-    TupleToIntersection<{
-      [Key in keyof DefineWidgets]: DefineWidgets[Key] extends DefineWidgetOption<infer Value> ? Value : never;
-    }>
-  >();
-
+export function renderer<PluginOption extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
+  plugins?: [...PluginOption];
+}): RendererOutput<PluginOption> {
   const plugins =
     options?.plugins
       ?.reduce((prev: RendererPlugin[], curr) => {
@@ -48,19 +36,13 @@ export function renderer<
       }, [])
       .map((plugin) => plugin()) ?? [];
 
-  options?.defineWidgets?.forEach((item) => {
-    item?.({ defineWidget: widgetMapStore.setWidget });
-  });
-
   return {
     Renderer(formRenderProps) {
       return (
-        <WidgetMapStoreContext.Provider value={widgetMapStore}>
-          <PluginContext.Provider value={plugins}>
-            <FormRender {...formRenderProps} />
-            <EffectManager />
-          </PluginContext.Provider>
-        </WidgetMapStoreContext.Provider>
+        <PluginContext.Provider value={plugins}>
+          <FormRender {...formRenderProps} />
+          <EffectManager />
+        </PluginContext.Provider>
       );
     },
   };

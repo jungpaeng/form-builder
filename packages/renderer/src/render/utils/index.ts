@@ -1,1 +1,1 @@
-export { NormalizedMetaData, NormalizedFieldData } from './meta';
+export * from './meta';
