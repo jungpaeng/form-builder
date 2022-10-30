@@ -29,13 +29,8 @@ export function FormRenderField<
               let outputNode = <>{!!field.element ? <field.element {...elementProps} /> : null}</>;
 
               plugins.forEach((plugin) => {
-                outputNode =
-                  plugin.wrapField?.({
-                    field: field,
-                    render: () => outputNode,
-                  }) ?? outputNode;
+                outputNode = plugin.wrapField?.({ field, render: () => outputNode }) ?? outputNode;
               });
-
               return outputNode;
             },
           };
