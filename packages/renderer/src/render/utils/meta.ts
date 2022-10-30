@@ -18,4 +18,5 @@ export type FieldData<FieldExtension extends Record<string, unknown> = {}> = Fie
    * @description 기본 모드일 때 보여지는 위젯
    */
   element?: React.ElementType;
+  elementProps?: Record<string, unknown>;
 };

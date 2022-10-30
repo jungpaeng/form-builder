@@ -25,7 +25,8 @@ export function FormRenderField<
           return {
             field,
             render(args) {
-              let outputNode = <>{!!field.element ? <field.element {...args?.props} /> : null}</>;
+              const elementProps = { ...field.elementProps, ...args };
+              let outputNode = <>{!!field.element ? <field.element {...elementProps} /> : null}</>;
 
               plugins.forEach((plugin) => {
                 outputNode =
