@@ -1,11 +1,11 @@
-import { DrawRenderArgs, NormalizedFieldData } from '@form-builder/renderer';
+import { DrawRenderArgs, FieldData } from '@form-builder/renderer';
 import React from 'react';
 
 import { useFormBuilderValueContext } from '../context/FormBuilderValueContext';
 import { FieldExtension } from '../formBuilderPlugin';
 
 type FormFieldWrapProps = {
-  field: NormalizedFieldData<FieldExtension>;
+  field: FieldData<FieldExtension>;
   render(args: DrawRenderArgs): React.ReactNode;
 };
 

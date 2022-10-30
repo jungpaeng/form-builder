@@ -2,34 +2,32 @@ import React from 'react';
 
 import { EffectManager } from './effects';
 import { PluginContext, RendererPlugin } from './plugins';
-import { defineWidget } from './render';
 import { FormRender, FormRenderProps } from './render/components';
-import { BeforeRenderAction, TupleToIntersection, UnionToIntersection } from './types';
+import { TupleToIntersection, UnionToIntersection } from './types';
 
-type MetaValueValidator<T> = T extends RendererPlugin<infer M, Record<string, unknown>> ? M : never;
-type FieldValueValidator<T> = T extends RendererPlugin<Record<string, unknown>, infer F> ? F : never;
+type MetaValueValidator<PluginOption> = PluginOption extends RendererPlugin<infer Meta, never> ? Meta : never;
+type FieldValueValidator<PluginOption> = PluginOption extends RendererPlugin<never, infer Field> ? Field : never;
 
-type RendererOutput<T extends Array<RendererPlugin | RendererPlugin[]>> = {
+type RendererOutput<PluginOption extends Array<RendererPlugin | RendererPlugin[]>> = {
   Renderer: React.FC<
     FormRenderProps<
-      T extends Array<Array<infer _T>>
-        ? UnionToIntersection<MetaValueValidator<_T>>
+      PluginOption extends Array<Array<infer Value>>
+        ? UnionToIntersection<MetaValueValidator<Value>>
         : TupleToIntersection<{
-            [I in keyof T]: MetaValueValidator<T[I]>;
+            [Key in keyof PluginOption]: MetaValueValidator<PluginOption[Key]>;
           }>,
-      T extends Array<Array<infer _T>>
-        ? UnionToIntersection<FieldValueValidator<_T>>
+      PluginOption extends Array<Array<infer Value>>
+        ? UnionToIntersection<FieldValueValidator<Value>>
         : TupleToIntersection<{
-            [I in keyof T]: FieldValueValidator<T[I]>;
+            [Key in keyof PluginOption]: FieldValueValidator<PluginOption[Key]>;
           }>
     >
   >;
 };
 
-export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
-  plugins?: [...T];
-  beforeRender?: BeforeRenderAction[];
-}): RendererOutput<T> {
+export function renderer<PluginOption extends Array<RendererPlugin | RendererPlugin[]>>(options?: {
+  plugins?: [...PluginOption];
+}): RendererOutput<PluginOption> {
   const plugins =
     options?.plugins
       ?.reduce((prev: RendererPlugin[], curr) => {
@@ -37,13 +35,6 @@ export function renderer<T extends Array<RendererPlugin | RendererPlugin[]>>(opt
         return [...prev, curr];
       }, [])
       .map((plugin) => plugin()) ?? [];
-
-  options?.beforeRender
-    ?.reduce((prev: BeforeRenderAction[], curr) => {
-      if (Array.isArray(curr)) return [...prev, ...curr];
-      return [...prev, curr];
-    }, [])
-    .forEach((item) => item?.({ actions: { defineWidget } }));
 
   return {
     Renderer(formRenderProps) {

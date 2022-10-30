@@ -1,5 +1,3 @@
-import { getWidget, WidgetKey } from './widget';
-
 export type MetaData<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
@@ -19,28 +17,6 @@ export type FieldData<FieldExtension extends Record<string, unknown> = {}> = Fie
    * @description widgetMap에서 조회하기 위한 위젯 키
    * @description 기본 모드일 때 보여지는 위젯
    */
-  widget?: WidgetKey;
+  element?: React.ElementType;
+  elementProps?: Record<string, unknown>;
 };
-
-export type NormalizedMetaData<
-  MetaExtension extends Record<string, unknown> = {},
-  FieldExtension extends Record<string, unknown> = {}
-> = MetaExtension & {
-  fields: NormalizedFieldData<FieldExtension>[];
-};
-
-export type NormalizedFieldData<FieldExtension extends Record<string, unknown> = {}> = FieldExtension & {
-  key: string;
-  widget?: WidgetKey;
-};
-
-export function normalizeMetaWidget<
-  MetaExtension extends Record<string, unknown> = {},
-  FieldExtension extends Record<string, unknown> = {}
->(meta: MetaData<MetaExtension, FieldExtension>): NormalizedMetaData<MetaExtension, FieldExtension> {
-  const normalizeFields = meta.fields.map((field) => {
-    return { ...field, widget: getWidget(field.widget!) };
-  });
-
-  return { ...meta, fields: normalizeFields };
-}

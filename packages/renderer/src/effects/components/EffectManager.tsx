@@ -6,13 +6,7 @@ export function EffectManager() {
   const plugins = usePluginContext();
 
   React.useEffect(() => {
-    function onInit() {
-      plugins.forEach((plugin) => {
-        plugin.onInit?.();
-      });
-    }
-
-    onInit();
+    plugins.forEach((plugin) => plugin.onInit?.());
   }, [plugins]);
 
   return null;

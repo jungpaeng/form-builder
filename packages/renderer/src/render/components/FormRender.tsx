@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { usePluginContext } from '../../plugins';
-import { MetaData, normalizeMetaWidget } from '../utils/meta';
+import { MetaData } from '../utils/meta';
 import { FormRenderField } from './FormRenderField';
 
 export type FormRenderProps<
@@ -16,16 +16,14 @@ export function FormRender<
   FieldExtension extends Record<string, unknown> = {}
 >({ meta }: FormRenderProps<MetaExtension, FieldExtension>) {
   const plugins = usePluginContext();
-
   const metaData = typeof meta === 'function' ? meta() : meta;
-  const normalizedMetaWidget = normalizeMetaWidget(metaData);
 
   let outputNode: React.ReactElement = (
     <>
       {plugins
         .filter((plugin) => !!plugin.draw)
         .map((plugin) => {
-          return <FormRenderField key={plugin.key} meta={normalizedMetaWidget} plugin={plugin} />;
+          return <FormRenderField key={plugin.key} meta={metaData} plugin={plugin} />;
         })}
     </>
   );
@@ -33,7 +31,7 @@ export function FormRender<
   plugins.forEach((plugin) => {
     outputNode =
       plugin.wrapRender?.({
-        meta: normalizedMetaWidget,
+        meta: metaData,
         render: () => outputNode,
       }) ?? outputNode;
   });

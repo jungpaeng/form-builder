@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { RendererPlugin, usePluginContext } from '../../plugins';
-import { NormalizedMetaData } from '../utils/meta';
+import { MetaData } from '../utils/meta';
 
 type FormRenderFieldProps<
   MetaExtension extends Record<string, unknown> = {},
   FieldExtension extends Record<string, unknown> = {}
 > = {
-  meta: NormalizedMetaData<MetaExtension, FieldExtension>;
+  meta: MetaData<MetaExtension, FieldExtension>;
   plugin: ReturnType<RendererPlugin>;
 };
 
@@ -25,7 +25,8 @@ export function FormRenderField<
           return {
             field,
             render(args) {
-              let outputNode = <>{!!field.widget ? <field.widget {...args?.props} /> : null}</>;
+              const elementProps = { ...field.elementProps, ...args };
+              let outputNode = <>{!!field.element ? <field.element {...elementProps} /> : null}</>;
 
               plugins.forEach((plugin) => {
                 outputNode =
