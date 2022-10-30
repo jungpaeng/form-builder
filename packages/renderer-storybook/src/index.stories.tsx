@@ -1,29 +1,29 @@
-import { defineWidgetPlugin } from '@form-builder/plugin-define-widget';
+import { defineWidgetPlugin, WidgetValueData } from '@form-builder/plugin-define-widget';
 import { renderer, RendererPlugin } from '@form-builder/renderer';
 import React from 'react';
 
 export default { title: 'Welcome', meta: { key: 'value' } };
 
+const input: WidgetValueData<{ widgetKey: 'input'; value: string }> = {
+  element: 'input',
+};
+const select: WidgetValueData<{ widgetKey: 'select'; options: string[] }> = {
+  element: 'select',
+};
+const button: WidgetValueData<{ widgetKey: 'button'; type: string }> = {
+  element: 'button',
+};
+
 const { Renderer } = renderer({
-  plugins: [
-    defineWidgetPlugin({
-      input: { element: () => <input value="custom-input" /> },
-    }),
-    drawPlugin(),
-  ],
+  plugins: [defineWidgetPlugin({ input, select, button }), drawPlugin()],
 });
 
 export const Story = () => (
   <Renderer
     meta={{
       fields: [
-        { key: 'fields-input-1', element: 'input' },
-        { key: 'fields-input-2', widgetKey: 'input' },
-        { key: 'fields-input-3', widgetKey: 'input' },
-        {
-          key: 'fields-submit',
-          element: () => <button type="submit">submit</button>,
-        },
+        { key: 'fullName', widgetKey: 'input', value: '' },
+        { key: 'email', widgetKey: 'input', value: '' },
       ],
     }}
   />
@@ -38,9 +38,9 @@ function drawPlugin(): RendererPlugin {
       draw({ render }) {
         return (
           <div className="draw-render">
-            {render().fields.map(({ field, render }) => (
-              <React.Fragment key={field.key}>{render()}</React.Fragment>
-            ))}
+            {render().fields.map(({ field, render }) => {
+              return <React.Fragment key={field.key}>{render()}</React.Fragment>;
+            })}
           </div>
         );
       },

@@ -1,23 +1,36 @@
 import { RendererPlugin } from '@form-builder/renderer';
 import React from 'react';
 
-type WidgetStore<WidgetExtension extends Record<string, unknown> = {}> = {
-  [key: string]: WidgetExtension & {
-    element: React.ElementType;
-  };
+type WidgetExtensionType<Extension extends Record<string, unknown> = {}> = Extension & { widgetKey: string };
+export type WidgetValueData<WidgetExtension extends WidgetExtensionType = { widgetKey: string }> = {
+  element: React.ElementType;
+  widgetOptions?: WidgetExtension;
+};
+type WidgetStoreData = {
+  [storeName: string]: WidgetValueData;
 };
 
-export function defineWidgetPlugin<WidgetStoreValue extends WidgetStore>(
-  widget: WidgetStoreValue
-): RendererPlugin<{}, { widgetKey?: keyof WidgetStoreValue }> {
+type WidgetOutput<WidgetStore extends WidgetStoreData> = WidgetStore extends Record<
+  string,
+  WidgetValueData<infer WidgetExtension>
+>
+  ? WidgetExtension
+  : never;
+
+export function defineWidgetPlugin<Data extends WidgetStoreData>(
+  widgetStore: Data
+): RendererPlugin<{}, WidgetOutput<Data>> {
   return () => {
     return {
       key: 'define-widget',
       wrapField({ field, render }) {
-        const WidgetElement = field.widgetKey && widget[field.widgetKey].element;
+        const widgetValue = field.widgetKey && widgetStore[field.widgetKey];
+        if (!widgetValue) {
+          return <React.Fragment>{render()}</React.Fragment>;
+        }
 
-        if (WidgetElement) return <WidgetElement />;
-        return <React.Fragment>{render()}</React.Fragment>;
+        const { element: WidgetElement, widgetOptions } = widgetValue;
+        return <WidgetElement {...widgetOptions} />;
       },
     };
   };

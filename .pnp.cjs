@@ -2749,7 +2749,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:10b4fd47e380ab449c331ad57629abe3efa1e63177c8095ef5d4954f9ab23192b008a9a841294914317a1de3ecafe9089afc09d2ee53ae7940f8b8ccc2f90142#npm:7.31.10"],\
             ["eslint-plugin-react-hooks", "virtual:10b4fd47e380ab449c331ad57629abe3efa1e63177c8095ef5d4954f9ab23192b008a9a841294914317a1de3ecafe9089afc09d2ee53ae7940f8b8ccc2f90142#npm:4.6.0"],\
             ["eslint-plugin-unused-imports", "virtual:10b4fd47e380ab449c331ad57629abe3efa1e63177c8095ef5d4954f9ab23192b008a9a841294914317a1de3ecafe9089afc09d2ee53ae7940f8b8ccc2f90142#npm:2.0.0"],\
-            ["react", "npm:18.2.0"]\
+            ["react", "npm:18.2.0"],\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
